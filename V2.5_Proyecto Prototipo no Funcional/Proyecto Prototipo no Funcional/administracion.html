@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Administración</title>
+      <meta charset="utf-8">
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link rel="stylesheet" type="text/css" href="css/panel.css">
+    </head>
+
+    <body>
+        
+        <div class="contenedor2"></div>
+
+        <div class="contenedor">
+              <!--Logo-->
+              <img src="img/logo.jpeg" class="circle responsive-img MainLogo">
+              
+              <!--Siguiente fila-->
+              <div class="row">
+                <div class="col offset-s3"><h5 style="color: white;"><b>Administración</b></h5></div>
+              
+              </div>
+
+              <!--Siguiente fila-->
+              <div class="row">
+                <div class="col offset-s4"><h4 style="color: white;"><b>¿Que desea Realizar?</h4></b></div>
+              </div>
+        </div>
+
+        <div class="contenedor3">
+          <div class="contenedor4">
+            <div class="row">
+              
+              <div class="fixed-action-btn btnAtras3">
+                    <a class="btn-floating btn-large green">
+                      <i class="large material-icons">add</i>
+                    </a>
+                    <ul class="actionBtn">
+                      <li><a href="index.html" class="btn-floating red"><i class="material-icons">close</i></a></li>
+                      <li><a href="administracion.html" class="btn-floating green"><i class="material-icons">sync</i></a></li>
+                      <li><a href="#" class="btn-floating yellow darken-1"><i class="material-icons">arrow_forward</i></a></li>
+                      <li><a href="panel.html" class="btn-floating blue"><i class="material-icons">arrow_back</i></a></li>
+                    </ul>
+                  </div>
+                
+            </div>
+
+            <div class="row">
+              <a href="datRegUsuarios.html" class="waves-effect lime darken-4 btn-large col s12" title="Revisar los movimientos echos en la sucursal"><i class="material-icons left">class</i>Agregar Usuario</a>
+            </div>
+
+
+            <div class="row">
+              <a href="EditElimUsuarios.html" class="waves-effect lime darken-4 btn-large col s12"><i class="material-icons left">assignment</i>Editar/Eliminar usuario</a>
+            </div>
+
+                     
+          </div>
+        </div>
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.fixed-action-btn');
+    var instances = M.FloatingActionButton.init(elems, {
+      direction: 'right',
+      hoverEnabled: false
+    });
+  });
+      </script>
+    </body>
+  </html>

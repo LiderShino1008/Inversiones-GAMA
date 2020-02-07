@@ -1,0 +1,95 @@
+
+
+body{
+background-image: url("../img/fondo11.jpeg");
+background-repeat: no-repeat;
+background-size: 100%;
+}
+
+.estiloLogin{
+	z-index: -1;
+	background-color: rgba(16, 74, 0,0.5);
+	left: 21%;
+	position: absolute; 
+	top: 40%;
+	display: block;
+	height: auto;
+	width: 60%;
+	border-radius: 31px 31px 31px 31px;
+	-moz-border-radius: 31px 31px 31px 31px;
+	-webkit-border-radius: 31px 31px 31px 31px;
+	border: 0px solid #000000;
+}
+
+.contenedor{
+	position: absolute;
+	display: block;
+	top: 10%;
+	left: 0%;
+	width: 60%;
+}
+
+.contenedorLogin{
+	position: absolute;
+	display: block;
+	background-color: green;
+	width: 70%;
+	height: 70%;
+	left: 10%;
+}
+.navegador{
+	position: absolute;
+	display: block;
+	background-color: rgba(47, 92, 20, 0.8);
+	border-radius: 0px 0px 62px 0px;
+-moz-border-radius: 0px 0px 62px 0px;
+-webkit-border-radius: 0px 0px 62px 0px;
+border: 0px solid #000000;
+}
+
+@media screen and (max-width:640px) {
+
+body{
+background-image: url("../img/fondo11.jpeg");
+background-repeat: no-repeat;
+background-size: 100% 800px;
+}
+
+.estiloLogin{
+	z-index: -1;
+	background-color: rgba(16, 74, 0,0.5);
+	top: 40%;
+	left: 5%;
+	position: absolute;
+	height: auto;
+	width: 80%;
+	border-radius: 31px 31px 31px 31px;
+	-moz-border-radius: 31px 31px 31px 31px;
+	-webkit-border-radius: 31px 31px 31px 31px;
+	border: 0px solid #000000;
+}
+.logo{
+	position: absolute;
+	top: 19px;
+	width: 40%;
+	left: 0%;
+}
+
+.contenedor{
+	position: absolute;
+	top: 5%;
+	left: 15%;
+	width: 60%;
+}
+
+.navegador{
+	position: absolute;
+	display: block;
+	background-color: rgba(47, 92, 20, 0.8);
+	border-radius: 0px 0px 62px 62px;
+-moz-border-radius: 0px 0px 62px 62px;
+-webkit-border-radius: 0px 0px 62px 62px;
+border: 0px solid #000000;
+}
+
+}
