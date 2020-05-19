@@ -4,7 +4,7 @@
 
     $pnombre = $_GET["pnombre"];
     $papellido= $_GET["papellido"];
-    $contrasenia = $_GET["papellido"];
+    $contrasenia = $_GET["pcontraseña"];
     $tipo = $_GET["tipo"];
     $telefono = $_GET["telefono"];
     $area = $_GET["area"];
