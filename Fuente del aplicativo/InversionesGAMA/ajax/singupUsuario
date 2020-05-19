@@ -1,6 +1,5 @@
 <?php
 
-
         Obtener Tipos
             include_once '../class/conexionOracle.php';
             $conexion = new Conexion();
@@ -13,8 +12,7 @@
             }
             echo json_encode($tipo);
             $conexion->cerrarConexion();
-            break;
-	    
+          
         Registrar
         //esta parte del conn es la direccion donde tenes el localhost en tu compu
             $conn = oci_connect("walterwaleska","walterwaleska","localhost/xe") or die;
@@ -48,7 +46,7 @@
             $respuesta["pcMessage"] = "$pcMessage";
             echo json_encode($respuesta);
             oci_close($conn);
-            break;
+          
             
 	}    
 ?>
