@@ -1,8 +1,7 @@
 <?php
-    $accion = $_GET["accion"];
 
-	switch ($accion) {
-        case 'Obtener Tipos':
+
+        Obtener Tipos
             include_once '../class/conexionOracle.php';
             $conexion = new Conexion();
             $SQL = "SELECT tipo, descripcion FROM tipo";
@@ -15,7 +14,8 @@
             echo json_encode($tipo);
             $conexion->cerrarConexion();
             break;
-        case 'Registrar':
+	    
+        Registrar
         //esta parte del conn es la direccion donde tenes el localhost en tu compu
             $conn = oci_connect("walterwaleska","walterwaleska","localhost/xe") or die;
             $sql= 'BEGIN SP_GESTIONUSUARIO(:pnombre,:papellido,:pcontraseña,:tipo,:telefono,:area,:username,:direccion,:contrato); END;';
