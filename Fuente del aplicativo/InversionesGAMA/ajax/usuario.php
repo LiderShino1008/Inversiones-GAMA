@@ -1,65 +1,58 @@
 <?php
-    $accion = $_GET["accion"];
-    switch ($accion) {
-        case 'registrar':
-            // Insertar los siguientes valores en la tabla SQL Persona
-            //$_GET["id"], $_GET["pnombre"], $_GET["snombre"], $_GET["papellido"], $_GET["sapellido"], $_GET["telefono"], $_GET["direccion"], $_GET["genero"]
-            
-            // Insertar los siguientes valores en la tabla SQL Usuario
-            //$_GET["username"], $_GET["password1"], $_GET["contrato"], $_GET["estado"], $_GET["id"], $_GET["tipo"], $_GET["area"]
-            
-            // El SP debe SOLA Y UNICAMENTE devolver codigo y mensaje
-            $respuesta["codigo"] = 1;
-            $respuesta["mensaje"] ='Usuario registrado correctamente';
-            // RETORNAR RESPUESTA A JS
-            echo json_encode($respuesta);
-            break;
 
-        case 'abrirModal':
-            // Seleccionar información del elemento con el id = $_GET["idUsuario"]
-            // Traer los siguientes valores de la tabla SQL Persona: pnombre, snombre, papellido, sapellido, telefono, direccion
-            // Traer los siguientes valores de la tabla SQL Usuario: username, contrato, estado
-            // Traer los siguientes valores de la tabla SQL TipoUsuario: tipoUsuario
-            // Traer los siguientes valores de la tabla SQL AreaTrabajo: areaTrabajo
+ session_start();
+
+    $pnombre = $_GET["pnombre"];
+    $papellido= $_GET["papellido"];
+    $contrasenia = $_GET["papellido"];
+    $tipo = $_GET["tipo"];
+    $telefono = $_GET["telefono"];
+    $area = $_GET["area"];
+    $username = $_GET["username"];
+    $direccion = $_GET["direccion"];
+    $contrato = $_GET["contrato"];
+
+    include_once '../class/conexionOracle.php';
+    $conexion = new Conexion();
+    $SQL= "SELECT * FROM Usuario";
+    $resultado = $conexion->ejecutarConsulta($SQL);
+    $respuesta = '';
+
+    while ($usuario = $conexion->obtenerFila($resultado)){
+        if($usuario["EMAIL"]==$email && $usuario["CONTRASENIA"]==$contrasenia){
             
-            // Guardar los resultados en la variable $respuesta ... EL CODIGO ABAJO ES UN EJEMPLO PERO NO ES ASI, SOLO BASTA CON GUARDAR DIRECTAMENTE LA CONSULTA EN LA VARIABLE NO UNO POR UNO LOS DATOS
-            $respuesta["pnombre"] = "Juan";
-            $respuesta["snombre"] = "Alberto";
-            $respuesta["papellido"] = "Pérez";
-            $respuesta["sapellido"] = "Lagos";
-            $respuesta["tipo"] = "Empleado";
-            $respuesta["telefono"] = "33008800";
-            $respuesta["contrato"] = "123456";
-            $respuesta["area"] = "Inventario";
-            $respuesta["username"] = "JuanAPL";
-            $respuesta["direccion"] = "Barrio La Playa, La Ceiba";
+            $_SESSION["user_pnombre"] = $usuario["pnombre"];
+            $_SESSION["user_papellido"] = $_GET["papellido"];
+            $_SESSION["user_tipo"] = $usuario["tipo"];
+            $_SESSION["user_telefono"] = $usuario["telefono"];
+            $_SESSION["user_area"] = $usuario["area"];
+            $_SESSION["user_username"] = $usuario["username"];
+            $_SESSION["user_direccion"] = $usuario["direccion"];
+            $_SESSION["user_contrato"] = $usuario["contrato"];
+       
+            
+            $respuesta["codigo"]=1;
+            $respuesta["mensaje"]='Credenciales válidas';
             $respuesta["estado"] = 0;
-            // RETORNAR RESPUESTA A JS
             echo json_encode($respuesta);
-            break;
-            
-        case 'editar':
-            // Editar el elemento con el id = $_GET["idUsuario"]
-            // Update los valores con los siguientes datos en las respectivas tablas: $_GET["tipo"], $_GET["telefono"], $_GET["contrato"], $_GET["area"], $_GET["username"}, $_GET["password"], $_GET["direccion"], $_GET["estado"];
+            $conexion->cerrarConexion();
+            exit();
+        }
+    }
+    $respuesta["codigo"]=0;
+    $respuesta["mensaje"]="Credenciales inválidas";
+    echo json_encode($respuesta);
 
-            // Simulacion coincidencia de contraseña anterior del usuario
-            $old = "contraseNIA#2020";
-            if ($old == $_GET["oldPassword"]) {
-                // El SP debe SOLA Y UNICAMENTE devolver codigo y mensaje
-                $respuesta["codigo"] = 1;
-                $respuesta["mensaje"] ='Usuario registrado correctamente';
-                // RETORNAR RESPUESTA A JS
-                echo json_encode($respuesta);
-                break;
-            }
-            $respuesta["mensaje"] = "La contraseña anterior del usuario no es válida";
-            $respuesta["codigo"] = 0;
-            // RETORNAR LA RESPUESTA A JS
-            echo json_encode($respuesta);
-            break;
-            
-        case 'listaUsuarios':
+ case 'listaUsuarios':
             # code...
             break;
-    }
+
+
+    $conexion->cerrarConexion();
+
+ }
+
+
+
+
 ?>
