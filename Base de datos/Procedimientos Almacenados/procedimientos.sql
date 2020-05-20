@@ -681,3 +681,123 @@ BEGIN
 			pcMensaje:='Error';
 		END IF;
 END;
+
+
+----SP FACTURA AUN NO COMPILA :(
+create or replace procedure SP_RegistrarFactura(
+    pcUsername in varchar2,
+    pcContrasenia in varchar2,
+    pnIdFactura in number,
+    pdFecha in date,
+    pnIdCliente in number,
+    pnSubTotal in FLOAT,
+    pnImporteExento in FLOAT,
+    pnImporteGravado15 in FLOAT,
+    pnImporteGravado18 in FLOAT,
+    pnIsv15 in FLOAT,
+    pnIsv18 in FLOAT,
+    pnDescuentoTotal in FLOAT,
+    pnTotal in FLOAT,
+    
+    pnCodigo out number,
+    pcMensaje out varchar2
+)
+IS
+	vnConteo number;
+    vnIdUsuario varchar(13);
+    vnIdProducto number;
+    vnCant number;
+    vnTemp varchar(200);
+Begin
+
+    vnConteo:=0;
+    vnIdUsuario:=0;
+    vnIdProducto:=0;
+    vnCant:=0;
+    vnTemp:='';
+    pnCodigo:=0;
+    pcMensaje:='';
+
+    if pcUsername='' or pcUsername is null then
+        vnTemp:='Campo requerido';
+    end if;
+
+    if pcContrasenia='' or pcContrasenia is null then
+        vnTemp:='Campo requerido';
+    end if;
+
+    if pnIdFactura='' or pnIdFactura is null then
+        vnTemp:='Campo requerido';
+    end if;
+
+    if pdFecha='' or pdFecha is null then
+        vnTemp:='Campo requerido';
+    end if;
+
+    if pnIdCliente='' or pnIdCliente is null then
+        vnTemp:='Campo requerido';
+    end if;
+
+    if pnSubTotal='' or pnSubTotal is null then
+        vnTemp:='Campo requerido';
+    end if;
+
+    if pnImporteExento='' or pnImporteExento is null then
+        vnTemp:='Campo requerido';
+    end if;
+
+    if pnImporteGravado15='' or pnImporteGravado15 is null then
+        vnTemp:='Campo requerido';
+    end if;
+
+    if pnImporteGravado18='' or pnImporteGravado18 is null then
+        vnTemp:='Campo requerido';
+    end if;
+
+    if pnIsv15='' or pnIsv15 is null then
+        vnTemp:='Campo requerido';
+    end if;
+
+    if pnIsv18='' or pnIsv18 is null then
+        vnTemp:='Campo requerido';
+    end if;
+
+    if pnDescuentoTotal='' or pnDescuentoTotal is null then
+        vnTemp:='Campo requerido';
+    end if;    
+
+    if pnTotal='' or pnTotal is null then
+        vnTemp:='Campo requerido';
+    end if;
+
+    select count(*) into vnConteo from Factura
+    where pnIdFactura=idFactura;
+
+    select idUsuario into vnIdUsuario from Usuario
+    where pcUsername=Username;
+
+    --Seleccionar el id del producto que está asociado a la Factura
+    select df.producto_idproducto into vnIdProducto from DetalleFactura df
+    inner join Factura f on f.idFactura=df.factura_idFactura
+    where f.idFactura=pnIdFactura;
+
+    --Seleccionar la cantidad que se va a restar
+    select df.cantidad into vnCant from detalleFactura df
+    inner join Factura f on f.idFactura=df.factura_idFactura
+    inner join Producto p on p.idProducto=df.producto_idproducto
+    where p.idproducto=vnIdProducto;
+
+
+    if vnConteo=0 then
+        Insert into Factura(idFactura, fecha, subTotal, importeExento, importeGravado15, importeGravado18, isvtotal15, isvtotal18, descuentoTotal, total, cliente_idCliente, usuario_idUsuario)
+        values (pnIdFactura, pdFecha, pnSubTotal, pnImporteExento, pnImporteGravado15, pnImporteGravado18, pnIsv15, pnIsv18, pnDescuentoTotal, pnTotal, pnIdCliente, vnIdUsuario);
+        Update Producto set cantidadDisponible=(cantidadDisponible-vnCant) where idProducto=vnIdProducto;
+                pnCodigo:=1;
+                pcMensaje:='Factura Procesada';
+                Return;
+		  ELSE
+			pnCodigo:=0;
+			pcMensaje:='Error';
+            Return;
+    END IF;
+END;   
